@@ -1,13 +1,45 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { Form, Button } from 'antd'
+import Fields from 'easyform'
 
-import ExampleComponent from 'easyform'
+import fields from './fields'
 
-export default class App extends Component {
-  render () {
+console.log(Fields)
+
+class App extends React.Component {
+  state = {}
+
+  hatyndleSubmit = () => {
+    const { form } = this.props
+    form.validateFields((err, values) => {
+      console.log(values)
+    })
+  }
+
+  render() {
+    const { form } = this.props
+    const initialValues = {
+      asd: 1,
+    }
     return (
       <div>
-        <ExampleComponent text='Modern React component module' />
+        <Button onClick={this.handleSubmit}>submit</Button>
+        <Form>
+          <Fields form={form} initialValues={initialValues}>
+            <Fields.Field
+              {...{
+                name: 'startTime',
+                label: '开始时间',
+                required: true,
+                type: 'date',
+              }}
+            />
+          </Fields>
+          <Fields form={form} fields={fields} initialValues={initialValues} />
+        </Form>
       </div>
     )
   }
 }
+
+export default Form.create()(App)
