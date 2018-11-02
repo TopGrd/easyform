@@ -15,17 +15,40 @@ npm install --save easyform
 ```jsx
 import React, { Component } from 'react'
 
-import MyComponent from 'easyform'
+import Fields from 'easyform'
+
+const fields = [
+  {
+    name: 'name',
+    label: '计划名称',
+    col: 24,
+    required: true,
+  },
+  {
+    name: 'startTime',
+    label: '开始时间',
+    required: true,
+    type: 'date',
+  }
+];
 
 class Example extends Component {
-  render () {
+  render() {
     return (
-      <MyComponent />
+      <Form>
+        <Fields form={form} initialValues={initialValues}>
+          <Fields.Field
+            {...{
+              name: 'startTime',
+              label: '开始时间',
+              required: true,
+              type: 'date',
+            }}
+          />
+        </Fields>
+        <Fields form={form} fields={fields} initialValues={initialValues} />
+      </Form>
     )
   }
 }
 ```
-
-## License
-
-MIT © [topgrd](https://github.com/topgrd)
